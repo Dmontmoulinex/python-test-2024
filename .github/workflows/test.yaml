@@ -1,0 +1,32 @@
+---
+name: Test my application
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.10.6
+        architecture: x64
+
+    - name: Run tests
+      run: python3 -m unittest math.py
+    
+    - name: Run lint
+      run: |
+        python3 -m pip install pylint
+        pylint --exit-zero math.py
+
+    - name: Build Docker image
+      run: docker build -t test-python .
