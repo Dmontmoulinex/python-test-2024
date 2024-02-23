@@ -1,9 +1,10 @@
+
 import unittest
 
 class SimpleAddition:
     @staticmethod
     def addition(a, b):
-        return b + b
+        return a + b
 
 
 class TestSimpleAddition(unittest.TestCase):
